@@ -9,6 +9,8 @@ In this layer, complete updates or other modifications can be made, and upon res
 
 ### The modifications can be merged with rsync, I will work on this more
 
+#### The main code to make this bootable is in etc/initcpio/hooks/overlay-preview
+
 #### I use UKI boot directly, I don't use a bootloader, pay attention to this if you need to adapt something to a specific bootloader
 
 ## mount.sh
