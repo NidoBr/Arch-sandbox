@@ -12,6 +12,16 @@
 
 ### I use UKI boot directly, I don't use a bootloader, pay attention to this if you need to adapt something to a specific bootloader
 
+## mount.sh
+```
+# Clean the chroot
+mount.sh -c
+# Starts and mounts the
+mount.sh -s
+# run the mkinitcpio for the overlay
+mount.sh -m
+```
+
 ## Research sources:
 * [Overlay filesystem](https://wiki.archlinux.org/title/Overlay_filesystem)
 * [explaining-overlayfs](https://web.archive.org/web/20220712001252/https://www.datalight.com/blog/2016/01/27/explaining-overlayfs-%E2%80%93-what-it-does-and-how-it-works)
