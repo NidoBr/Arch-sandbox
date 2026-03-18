@@ -24,6 +24,9 @@ mount.sh -c
 mount.sh -s
 # run the mkinitcpio for the overlay
 mount.sh -m
+
+# An example to add the entry in the UEFI boot, remember to modify the path if necessary
+efibootmgr --create   --disk /dev/nvme0n1   --part 1   --label "Arch Preview"   --loader '\EFI\Arch\arch-preview.efi'
 ```
 
 ## Research sources:
