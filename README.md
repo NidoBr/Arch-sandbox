@@ -12,7 +12,7 @@ In this layer, complete updates or other modifications can be made, and upon res
 #### The main code to make this bootable is in etc/initcpio/hooks/overlay-preview
 
 ### operating flow
-
+![Exemplo](/sandbox.jpg)
 
 #### I use UKI boot directly, I don't use a bootloader, pay attention to this if you need to adapt something to a specific bootloader
 
