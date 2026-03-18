@@ -1,0 +1,49 @@
+run_hook() {
+	echo ":: Starting Arch-sandbox..."
+
+	mkdir -p /lower /newroot
+
+	# Indentify the ROOT through CMDLINE
+	if [ -z "${root}" ]; then
+		echo "ERRO: Parâmetro 'root=' não encontrado no cmdline."
+		return 1
+	fi
+
+	# Prepare /lower
+	local mount_opts="rw"
+	[ -n "${rootflags}" ] && mount_opts="${mount_opts},${rootflags}"
+
+	echo ":: Mount the ROOT on /lower..."
+	mount -t "${rootfstype:-auto}" -o "${mount_opts}" "${root}" /lower
+
+	# Directory used by mount.sh, here the changes
+	LOCAL_SANDBOX="/lower/sandbox"
+
+	if [ -d "$LOCAL_SANDBOX" ]; then
+		echo ":: /sandbox folder found on disk. Using PERSISTENT mode"
+		UPPER="$LOCAL_SANDBOX/upper"
+		WORK="$LOCAL_SANDBOX/work"
+		mkdir -p "$UPPER" "$WORK"
+	else
+		echo ":: /sandbox folder not found on disk. Using RAM mode."
+		mount -t tmpfs tmpfs /overlay
+		mkdir -p /overlay/upper /overlay/work
+		UPPER="/overlay/upper"
+		WORK="/overlay/work"
+	fi
+
+	# Assemble the final overlay
+	echo ":: Applying Overlay layer..."
+	mount -t overlay overlay -o lowerdir=/lower,upperdir="$UPPER",workdir="$WORK" /newroot
+
+	# Move critical directores
+	for dir in proc sys dev run; do
+		if [ -d "/$dir" ]; then
+			mkdir -p "/newroot/$dir"
+			mount --move "/$dir" "/newroot/$dir"
+		fi
+	done
+
+	echo ":: Sandbox ready. Changing root..."
+	exec switch_root /newroot /sbin/init
+}

@@ -1,0 +1,8 @@
+PRESETS=('default')
+
+ALL_config="/etc/mkinitcpio-preview.conf"
+ALL_kver="/boot/vmlinuz-linux"
+
+# If the ".efi" files are located in a different directory, modify
+default_uki="/boot/EFI/Arch/arch-preview.efi"
+default_options="--cmdline /etc/kernel/cmdline-preview"

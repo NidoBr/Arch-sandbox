@@ -1,0 +1,7 @@
+build() {
+	add_module overlay
+	add_binary mount
+	add_binary mkdir
+	add_binary switch_root
+	add_runscript
+}
