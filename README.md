@@ -9,7 +9,7 @@ In this layer, complete updates or other modifications can be made, and upon res
 
 ### The modifications can be merged with rsync, I will work on this more
 
-#### The main code to make this bootable is in etc/initcpio/hooks/overlay-preview
+#### The main code to make this bootable is in ![initcpio hook](/etc/initcpio/hooks/overlay-preview)
 
 ### operating flow
 ![Exemplo](/sandbox.jpg)
